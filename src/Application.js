@@ -23,29 +23,8 @@ const reducer = (state, action) => {
   return state;
 };
 
-const useLocalStorage = (initialState, key) => {
-  const get = () => {
-    let storage = localStorage.getItem(key);
-    storage = JSON.parse(storage);
-    debugger;
-    if (storage && Object.keys(storage).length > 0) {
-      return storage[key];
-    }
-    console.log('here2');
-    return initialState;
-  };
-
-  const [grudges, dispatch] = useReducer(reducer, get());
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify({ [key]: grudges }));
-  }, [grudges]);
-
-  return [grudges, dispatch];
-};
-
 const Application = () => {
-  const [grudges, dispatch] = useLocalStorage(initialState, 'my_grudges');
+  const [grudges, dispatch] = useReducer(reducer, initialState);
 
   const addGrudge = ({ person, reason }) => {
     dispatch({
