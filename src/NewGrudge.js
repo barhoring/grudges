@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-const NewGrudge = ({ onSubmit }) => {
+const NewGrudge = React.memo(({ onSubmit }) => {
   const [person, setPerson] = useState('');
   const [reason, setReason] = useState('');
 
-  const handleChange = event => {
+  console.log('Rendering new grudge');
+
+  const handleChange = (event) => {
     event.preventDefault();
     onSubmit({ person, reason });
   };
@@ -16,18 +18,18 @@ const NewGrudge = ({ onSubmit }) => {
         placeholder="Person"
         type="text"
         value={person}
-        onChange={event => setPerson(event.target.value)}
+        onChange={(event) => setPerson(event.target.value)}
       />
       <input
         className="NewGrudge-input"
         placeholder="Reason"
         type="text"
         value={reason}
-        onChange={event => setReason(event.target.value)}
+        onChange={(event) => setReason(event.target.value)}
       />
       <input className="NewGrudge-submit button" type="submit" />
     </form>
   );
-};
+});
 
 export default NewGrudge;
